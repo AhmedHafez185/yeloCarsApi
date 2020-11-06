@@ -5,6 +5,7 @@
  */
 package com.yelo.app.service;
 
+import com.yelo.app.dto.CarDto;
 import com.yelo.app.entity.Car;
 import java.util.List;
 
@@ -13,9 +14,18 @@ import java.util.List;
  * @author Ahmed Hafez
  */
 public interface CarService {
-    Car addCar(Car car);
-    Car updateCar(Car car);
-    List<Car> getAllCar();
-    Car getCarById(long carId);
+
+    CarDto addCar(CarDto carDto);
+
+    CarDto updateCar(CarDto carDto);
+
+    List<CarDto> getAllCar();
+
+    CarDto getCarById(long carId);
+
     void deleteCar(long id);
+
+    Car convertToEntity(CarDto carDto);
+
+    CarDto convertToDto(Car car);
 }
