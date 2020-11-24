@@ -10,12 +10,11 @@ package com.yelo.app.dto;
  * @author Ahmed Hafez
  */
 public class CarDto {
-	  private Long id;
+	    private Long id;
 	    private String owner;
 	    private String name;
 	    private String color;
 	    private String model;
-	    
 	    private byte hideMe;
 	    public CarDto() {
 	    }

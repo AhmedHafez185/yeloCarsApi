@@ -11,8 +11,10 @@ import com.yelo.app.repository.CarRepositoy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 /**
@@ -28,7 +30,7 @@ public class CarServiceImpl implements CarService {
     private ModelMapper modelMapper;
 
     @Override
-    public CarDto addCar(CarDto carDto) {
+    public CarDto addCar(@Valid CarDto carDto) {
         Car car = convertToEntity(carDto);
         carRepository.save(car);
         carDto.setId(car.getId());
@@ -67,7 +69,6 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public CarDto getCarById(long carId) {
-
         return convertToDto(carRepository.findById(carId).get());
 
     }
@@ -89,9 +90,10 @@ public class CarServiceImpl implements CarService {
         Car car = modelMapper.map(carDto, Car.class);
         return car;
     }
-
-    public List<CarDto> SerchByNameOrModel(String key) {
-        List<Car> allCars = carRepository.SerchByNameOrModel(key);
+    @Override
+    public List<CarDto> SearchByNameOrOwner(String key) {
+        String pattern = "%"+key+"%";
+        List<Car> allCars = carRepository.SearchByNameOrOwner(pattern);
         List<CarDto> allCars2 = new ArrayList<CarDto>();
         for (Car car : allCars) {
             CarDto carDto = convertToDto(car);
@@ -100,9 +102,8 @@ public class CarServiceImpl implements CarService {
         return allCars2;
 
     }
-
     public List<CarDto> FilterByNameOrModel(String key) {
-        List<Car> allCars = carRepository.FilterByNameOrModel(key);
+        List<Car>allCars=carRepository.findAll(Sort.by(Sort.Direction.ASC,key));
         List<CarDto> allCars2 = new ArrayList<CarDto>();
         for (Car car : allCars) {
 

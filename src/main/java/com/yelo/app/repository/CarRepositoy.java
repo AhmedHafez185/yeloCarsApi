@@ -19,9 +19,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CarRepositoy extends JpaRepository<Car, Long> {
 
-    @Query(value = "select * from car c where c.name like :key or c.model like :key", nativeQuery = true)
-    public List<Car> SerchByNameOrModel(@Param("key") String key);
-
-    @Query(value = "select * from car c order By :key ", nativeQuery = true)
-    public List<Car> FilterByNameOrModel(@Param("key") String key);
+    @Query(value = "select * from car c where c.name like :key or c.owner like :key", nativeQuery = true)
+    public List<Car> SearchByNameOrOwner(@Param("key") String key);
 }

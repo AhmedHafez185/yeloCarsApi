@@ -15,17 +15,21 @@ import java.util.List;
  */
 public interface CarService {
 
-    CarDto addCar(CarDto carDto);
+    public CarDto addCar(CarDto carDto);
 
-    CarDto updateCar(CarDto carDto);
+    public CarDto updateCar(CarDto carDto);
 
-    List<CarDto> getAllCar();
+    public List<CarDto> getAllCar();
 
-    CarDto getCarById(long carId);
+    public CarDto getCarById(long carId);
 
-    void deleteCar(long id);
+    public void deleteCar(long id);
 
-    Car convertToEntity(CarDto carDto);
+    public Car convertToEntity(CarDto carDto);
 
-    CarDto convertToDto(Car car);
+    public CarDto convertToDto(Car car);
+
+    public List<CarDto> SearchByNameOrOwner(String key);
+
+    public List<CarDto> FilterByNameOrModel(String key);
 }
